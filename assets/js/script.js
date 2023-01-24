@@ -1,65 +1,49 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-
-
  $(function () {
 
-  var eventData;
+  $('.btn').click(function(event){
+    event.preventDefault();
+    var content = $(this).siblings('.description').val();
+    var time = $(this).parent().attr('id')
 
-  function renderData(){
+    localStorage.setItem(time, content)
 
-    if (localStorage.getItem('eventData') !== null) {
-      eventData=JSON.parse(localStorage.getItem('eventData'));
-      $('.description').each(function (button_id){
-      $(this).val(eventData[button_id]);
-          }); 
-    } else {
-        eventData={};
-        for (let i=1;i<=9;i++){
-        eventData[i]="";
-        }
-        console.log(eventData)
-    }
-  }
+  })
 
-  renderData();
+$("#9-hour .description").val(localStorage.getItem('9-hour'));
+$("#10-hour .description").val(localStorage.getItem('10-hour'));
+$("#11-hour .description").val(localStorage.getItem('11-hour'));
+$("#12-hour .description").val(localStorage.getItem('12-hour'));
+$("#13-hour .description").val(localStorage.getItem('13-hour'));
+$("#14-hour .description").val(localStorage.getItem('14-hour'));
+$("#15-hour .description").val(localStorage.getItem('15-hour'));
+$("#16-hour .description").val(localStorage.getItem('16-hour'));
+$("#17-hour .description").val(localStorage.getItem('17-hour'));
+
 
   function time() {
 
-  var currentTime = dayjs().format('HH:mm:ss');
+  var currentTime = dayjs().format('HH');
   console.log(currentTime);
   
-  $('.time-block').each(function (eventTime) {
-    var eventTime = $(this).attr('id');
+  $('.time-block').each(function () {
+    var eventTime = parseInt($(this).attr('id').split('-')[0]);
+    console.log('event-time', eventTime)
 
-    if(eventTime === currentTime){
+    if (eventTime < currentTime){
+      $(this).addClass('past');
+    } else if (eventTime == currentTime){
+      $(this).removeClass('past');
       $(this).addClass('present');
-    }
-
-    else if(eventTime > currentTime){
+    } else {
+      $(this).removeClass('past');
+      $(this).removeClass('present');
       $(this).addClass('future');
     }
-
-    else {
-      $(this).addClass('past');
-    }
-
   })
   };
 
-  setInterval(time(), 1000);
-
-  
-  $('.btn').click(function(event){
-  event.preventDefault();
-    var text = $(this).prev().val();
-    console.log("text", text);
-    var button_id=$(this).attr('id');
-    eventData[button_id]=text;
-    localStorage.setItem('eventData', JSON.stringify(eventData));
-  
-})
+  time()
+  setInterval(time(), 10000);
 
 function date() {
 
@@ -69,5 +53,5 @@ function date() {
 
 setInterval(date(), 1000);
  
-})
+});
 
