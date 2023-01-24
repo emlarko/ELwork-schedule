@@ -1,16 +1,19 @@
-# ELwork-schedule
-# 05 Third-Party APIs: Work Day Scheduler
+# Work Schedule
 
-## Your Task
+## Description 
 
-Create a simple calendar application that allows a user to save events for each hour of the day by modifying starter code. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
+The aim of this project was to modify starter code to create a calendar application that runs in the browser. 
 
-You'll need to use the [Day.js](https://day.js.org/en/) library to work with date and time. Be sure to read the documentation carefully and concentrate on using Day.js in the browser.
+## Usage 
 
-## User Story
+When the application is opened, the user will see the current date as well as time slots in which to save tasks. 
 
-```md
-AS AN employee with a busy schedule
-I WANT to add important events to a daily planner
-SO THAT I can manage my time effectively
-```
+The CSS dynamically updates as the current time changes: the text area color changes to grey for the past, red for the present and green for the future. 
+
+When the user saves a task in each of the time slots, the task is saved to the local storage. The tasks will stay saved to the time slots when the page is refreshed. 
+
+**GitHub Page:** 
+
+https://emlarko.github.io/ELwork-schedule/
+
+![Screenshot](assets/images/shedule-screenshot.png?raw=true "Screenshot")
